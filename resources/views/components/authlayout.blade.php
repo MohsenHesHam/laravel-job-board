@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-gray-900">
     <head>
-        <title>job Board- {{ $title ?? "onboarding top talent" }}</title>
+        <title>Job Board- {{ $title ?? "onboarding top talent" }}</title>
         <meta charset="utf-8">
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,21 +18,8 @@
                 <span class="font-bold text-lg tracking-wide text-white">Job<span class="text-indigo-400">Board</span></span>
               </a>
             </div>
-            <div class="flex lg:hidden">
-              <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-200 hover:bg-white/10 transition">
-                <span class="sr-only">Open main menu</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="size-6">
-                  <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </button>
-            </div>
-            <div class="hidden lg:flex lg:gap-x-12">
-              <a href="/" class="text-sm font-semibold text-white hover:text-indigo-400 transition">HOME</a>
-              <a href="/about" class="text-sm font-semibold text-white hover:text-indigo-400 transition">ABOUT</a>
-              <a href="/contact" class="text-sm font-semibold text-white hover:text-indigo-400 transition">CONTACT</a>
-              <a href="/post" class="text-sm font-semibold text-white hover:text-indigo-400 transition">BLOG</a>
-            </div>
-              <div class="flex flex-1 justify-end">
+            
+            <div class="flex flex-1 justify-end">
               <a href="/login" class="text-sm font-semibold text-white hover:text-indigo-400 transition">Log in <span aria-hidden="true"></span></a>
             </div>
              <div class="flex flex-1 justify-end">
@@ -49,20 +36,7 @@
         <!-- المحتوى الرئيسي -->
         <main class="relative isolate px-6 pt-32 pb-20 lg:px-8 flex min-h-[calc(100vh-140px)] items-center justify-center">
           <div class="mx-auto max-w-2xl py-12 text-center">
-            <div class="hidden sm:mb-8 sm:flex sm:justify-center">
-              
-            </div>
-            
-            
-            
-            <div class="mt-8 text-lg font-medium text-gray-400 sm:text-xl/8">
-              {{ $slot ?? '' }}
-            </div>
-            
-            <div class="mt-10 flex items-center justify-center gap-x-6">
-              <a href="/post" class="rounded-md bg-indigo-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 transition">Get started</a>
-              <a href="/about" class="text-sm font-semibold text-white hover:text-gray-300 transition">Learn more <span aria-hidden="true">→</span></a>
-            </div>
+            {{ $slot ?? '' }}
           </div>
         </main>
 
@@ -74,14 +48,12 @@
 
       <!-- Footer -->
       <footer class="border-t border-white/10 bg-gray-900/80 backdrop-blur-md">
-        <div class="mx-auto max-w-7xl px-6 py-8 md:flex md:items-center md:justify-between lg:px-8">
-          <div class="flex justify-center space-x-6 md:order-2">
-            <a href="/" class="text-sm text-gray-400 hover:text-white transition">Home</a>
-            <a href="/about" class="text-sm text-gray-400 hover:text-white transition">About</a>
-            <a href="/post" class="text-sm text-gray-400 hover:text-white transition">Blog</a>
-            <a href="/contact" class="text-sm text-gray-400 hover:text-white transition">Contact</a>
+        <div class="mx-auto max-w-7xl px-6 py-8 flex items-center justify-between lg:px-8">
+          <div class="flex items-center gap-2">
+            <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Logo" class="h-5 w-auto" />
+            <span class="text-sm font-semibold text-gray-300">Job<span class="text-indigo-400">Board</span></span>
           </div>
-          <div class="mt-6 md:order-1 md:mt-0 text-center md:text-left">
+          <div>
             <p class="text-xs text-gray-500">
               &copy; {{ date('Y') }} JobBoard, Inc. All rights reserved.
             </p>

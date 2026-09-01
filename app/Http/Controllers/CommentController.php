@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -10,8 +11,9 @@ class CommentController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+    {   
+         $comment=Comment::all();
+        return redirect("/comments/commect");
     }
 
     /**
@@ -19,7 +21,8 @@ class CommentController extends Controller
      */
     public function create()
     {
-        //
+          Comment::factory(5)->create();
+        return redirect("/comments/createComment");
     }
 
     /**
@@ -35,7 +38,8 @@ class CommentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $comment=comment::find($id);
+         return view('/comment/comment',['comment'=>$comment,"pagetitle"=>$comment->title]);
     }
 
     /**
@@ -59,6 +63,7 @@ class CommentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Comment::destroy($id);
+        return redirect("post/index");
     }
 }

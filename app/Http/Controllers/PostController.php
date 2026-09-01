@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\postvalid;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -13,8 +14,8 @@ class PostController extends Controller
     public function index()
     {
         
-        $post=Post::paginate (5);
-        return view('post/index', ['title'=>$post]);
+        $posts=Post::latest()->cursorPaginate(5);
+        return view('post/index', ['posts'=>$posts]);
     
 
     }
@@ -24,20 +25,25 @@ class PostController extends Controller
      */
     public function create()
     {
-          Post::factory(5)->create();
-        return response([
-            "massage"=>"Successfully Created !!",
-            "postes"=> "5"
-        ]
-        , 200);
+        //Post::factory(5)->create();
+        return view('/post/createpost');
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(postvalid $request)
     {
-        //
+       $post=new Post();
+       $post->title=$request->input('title');
+       $post->body=$request->input('body');
+       $post->auther=$request->input('auther');
+       $post->published=$request->has('published');
+
+       $post->save();
+
+       return redirect('/post')->with('success','Created Successflly!!');
     }
 
     /**
@@ -45,17 +51,8 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-         $post=Post::find($id);
-        //return view('/components/show',['post'=>$post,"pagetitle"=>$post->title]);
-        return response([
-            "massage"=>"found the post record",
-            "title"=>"$post->title",
-            "body"=>"$post->body",
-            "auther"=>"$post->auther",
-            
-            
-            
-            ],200);
+        $post = Post::findOrFail($id);
+        return view('components.show', ['post' => $post]);
     }
 
     /**
@@ -63,7 +60,7 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('post/editpost');
     }
 
     /**
@@ -80,10 +77,7 @@ class PostController extends Controller
     public function destroy(string $id)
     {
        Post::destroy($id);
-        return response([
-            "massage"=> "deleted successfully!!",
-        
-            ],204);
+      return redirect()->route('posts.index');
         
     }
 }
